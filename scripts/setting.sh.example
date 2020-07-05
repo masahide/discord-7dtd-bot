@@ -1,0 +1,4 @@
+
+PARAM_PATH=/7dtd/discord/bot-token
+DISCORD_CHANNEL_ID=111111111111111111
+export AWS_DEFAULT_REGION=ap-northeast-1 
