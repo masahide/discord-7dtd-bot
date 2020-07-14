@@ -1,5 +1,7 @@
 #!/bin/sh
 
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+
 SERVERDIR=/opt/games/7days
 #SERVERDIR=`dirname "$0"`
 cd "$SERVERDIR"
@@ -30,5 +32,7 @@ fi
 
 export LD_LIBRARY_PATH=.
 #export MALLOC_CHECK_=0
+
+$SCRIPT_DIR/send_start.sh &
 
 ./7DaysToDieServer.x86_64 -logfile $SERVERDIR/7DaysToDieServer_Data/output_log__`date +%Y-%m-%d__%H-%M-%S`.txt -quit -batchmode -nographics -dedicated $PARAMS

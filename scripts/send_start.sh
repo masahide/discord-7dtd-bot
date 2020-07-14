@@ -4,11 +4,14 @@ SCRIPT_DIR=$(cd $(dirname $0); pwd)
 . ${SCRIPT_DIR}/setting.sh
 . ${SCRIPT_DIR}/lib.sh
 
+sleep 60
+${SCRIPT_DIR}/check_start.sh > /tmp/check_start.log
 
 IPADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
 
-CONTENT="serverが起動しました"
-TITLE="${DOMAIN_NAME} (${IPADDRESS})"
+CONTENT="GameServer.LogOn successful"
+TITLE="${DOMAIN_NAME}"
 DESCRIPTION="Pass: ${PASS}"
 post_discord
+
 
