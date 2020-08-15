@@ -1,7 +1,13 @@
 #!/bin/bash
 
+PARAMFILE=~/.params_cache
 get_params () {
-	aws ssm get-parameters-by-path --path ${PARAM_PATH} --with-decryption
+	find $PARAMFILE -mtime +120 -mmin 5 -exec rm -rf {} \;
+	[[ -f $PARAMFILE ]] && cat $PARAMFILE && return
+	aws ssm get-parameters-by-path \
+		--path ${PARAM_PATH} \
+		--with-decryption \
+		| tee $PARAMFILE
 }
 
 get_param () {
@@ -15,17 +21,6 @@ DOMAIN_NAME=$(echo $PARAMS|get_param dmain_name)
 HOST_ZONE_ID=$(echo $PARAMS|get_param host_zone_id) 
 PASS=$(echo $PARAMS|get_param pass) 
 
-IPADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
-RECORD='{
-    "Comment": "UPSERT '${DOMAIN_NAME}'",
-    "Changes": [{
-    "Action": "UPSERT",
-	"ResourceRecordSet": {
-	    "Name": "'${DOMAIN_NAME}'",
-	    "Type": "A",
-	    "TTL": 5,
-	    "ResourceRecords": [{ "Value": "'${IPADDRESS}'"}]
-}}]}'
 
 post_discord () {
 	echo '{
@@ -43,6 +38,20 @@ post_discord () {
 }
 
 upsert_domain () {
-	aws route53 change-resource-record-sets --hosted-zone-id ${HOST_ZONE_ID} --change-batch file://<(echo ${RECORD})
+	IPADDRESS=$(curl -s http://169.254.169.254/latest/meta-data/public-ipv4)
+	RECORD='{
+    "Comment": "UPSERT '${DOMAIN_NAME}'",
+    "Changes": [{
+    "Action": "UPSERT",
+	"ResourceRecordSet": {
+	    "Name": "'${DOMAIN_NAME}'",
+	    "Type": "A",
+	    "TTL": 5,
+	    "ResourceRecords": [{ "Value": "'${IPADDRESS}'"}]
+}}]}'
+	aws route53 change-resource-record-sets \
+		--hosted-zone-id ${HOST_ZONE_ID} \
+		--change-batch \
+		file://<(echo ${RECORD})
 }
 
