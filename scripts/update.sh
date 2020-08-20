@@ -17,11 +17,11 @@ wget http://media.steampowered.com/installer/steamcmd_linux.tar.gz
 tar -xzvf steamcmd_linux.tar.gz && rm -f steamcmd_linux.tar.gz
 
 # install 7days to die
+# -beta latest_experimental \
 /opt/games/steamcmd/steamcmd.sh \
 	+login anonymous \
 	+force_install_dir /opt/games/7days \
 	+app_update 294420 \
-	-beta latest_experimental \
 	+quit
 chown 7dtd: -R /opt/games/7days
 
