@@ -150,9 +150,8 @@ func startInstance(s *discordgo.Session, m *discordgo.MessageCreate, i *ec2.Inst
 		Tts: false,
 		Embed: &discordgo.MessageEmbed{
 			Title: "サーバーを起動しました",
-			Description: fmt.Sprintf("起動中..\ninstanceID:%s\n%s",
+			Description: fmt.Sprintf("起動中..\ninstanceID:%s\n",
 				aws.StringValue(i.InstanceId),
-				res.GoString(),
 			),
 		},
 	})
