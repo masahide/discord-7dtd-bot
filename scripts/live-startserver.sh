@@ -35,4 +35,4 @@ export LD_LIBRARY_PATH=.
 
 $SCRIPT_DIR/send_start.sh &
 
-./7DaysToDieServer.x86_64 -logfile $SERVERDIR/7DaysToDieServer_Data/output_log__`date +%Y-%m-%d__%H-%M-%S`.txt -quit -batchmode -nographics -dedicated $PARAMS
+./7DaysToDieServer.x86_64 -logfile /home/7dtd/server.log -quit -batchmode -nographics -dedicated $PARAMS
