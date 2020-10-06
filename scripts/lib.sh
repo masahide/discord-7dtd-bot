@@ -2,7 +2,7 @@
 
 PARAMFILE=~/.params_cache
 get_params () {
-	find $PARAMFILE -mtime +120 -mmin 5 -exec rm -rf {} \;
+	find $PARAMFILE -mmin 5 -exec rm -rf {} \;
 	[[ -f $PARAMFILE ]] && cat $PARAMFILE && return
 	aws ssm get-parameters-by-path \
 		--path ${PARAM_PATH} \
