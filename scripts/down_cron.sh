@@ -21,4 +21,5 @@ systemctl status 7dtd|grep -q "Active: inactive" && exit
 [[ "$(players)" -eq "0" ]]  || exit 0
 
 ${SCRIPT_DIR}/shutdown.sh
+/opt/games/discord-7dtd-bot/scripts/backup.sh backup
 /usr/sbin/shutdown -h now
