@@ -34,6 +34,6 @@ export LD_LIBRARY_PATH=.
 #export MALLOC_CHECK_=0
 
 $SCRIPT_DIR/send_start.sh &
-$SCRIPT_DIR/update_allow_list.sh &
+#$SCRIPT_DIR/update_allow_list.sh &
 
 ./7DaysToDieServer.x86_64 -logfile /home/7dtd/server.log -quit -batchmode -nographics -dedicated $PARAMS
