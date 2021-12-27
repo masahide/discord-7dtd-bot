@@ -10,7 +10,7 @@ check_action () {
 start_shutdown () {
 	CONTENT="spot action: stop"
 	TITLE="サーバーを停止します"
-	DESCRIPTION="amazonからスポットインスタンス中断通知を受信しました\n一旦サーバーを安全に停止します\n再度起動させれば復活する可能性はあります\nスポットインスタンスの中断について:https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/spot-interruptions.html"
+	DESCRIPTION="amazonからスポットインスタンス中断通知を受信しました\n一旦サーバーを安全に停止します\n停止後にDiscordから再起動してください"
 	post_discord
 	sleep 30
 	${SCRIPT_DIR}/shutdown.sh
@@ -20,6 +20,6 @@ start_shutdown () {
 
 for i in {1..5}
 do	
-	check_action && start_shutdown
+	check_action && ${SCRIPT_DIR}/backup.sh backup && start_shutdown
 	sleep 10
 done
