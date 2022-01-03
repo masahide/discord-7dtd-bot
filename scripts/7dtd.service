@@ -6,7 +6,6 @@ After=syslog.target network.target
 [Service]
 Type=simple
 WorkingDirectory=/opt/games/7days/
-ExecStartPre=/opt/games/discord-7dtd-bot/scripts/send_ip.sh
 ExecStart=/opt/games/discord-7dtd-bot/scripts/live-startserver.sh -configfile=/opt/games/discord-7dtd-bot/scripts/live-serverconfig.xml
 ExecStop=/opt/games/discord-7dtd-bot/scripts/shutdown.sh
 User=7dtd
