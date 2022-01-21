@@ -3,6 +3,8 @@
 TIME=600
 
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
+. ${SCRIPT_DIR}/setting.sh
+. ${SCRIPT_DIR}/lib.sh
 
 FILE=/tmp/players
 
@@ -21,5 +23,8 @@ systemctl status 7dtd|grep -q "Active: inactive" && exit
 [[ "$(players)" -eq "0" ]]  || exit 0
 
 ${SCRIPT_DIR}/shutdown.sh
-/opt/games/discord-7dtd-bot/scripts/backup.sh backup
+${SCRIPT_DIR}/backup.sh backup
+${SCRIPT_DIR}/dynaup.sh
+CONTENT="サーバーを停止しました"
+post_discord2
 /usr/sbin/shutdown -h now

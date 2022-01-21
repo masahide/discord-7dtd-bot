@@ -23,6 +23,7 @@ HOST_ZONE_ID=$(echo $PARAMS|get_param host_zone_id)
 PASS=$(echo $PARAMS|get_param pass) 
 
 
+
 post_discord () {
 	json=/tmp/7dtd_executer.data.json
 	[[ -f $json ]] && [[ $(date "+%s") -le $(jq -r '.["ttl"]' $json) ]] && URL=$(jq -r '.["url"]' $json)
@@ -60,3 +61,18 @@ upsert_domain () {
 		file://<(echo ${RECORD})
 }
 
+
+post_discord2 () {
+	json=/tmp/7dtd_executer.data.json
+	[[ -f $json ]] && [[ $(date "+%s") -le $(jq -r '.["ttl"]' $json) ]] && URL=$(jq -r '.["url"]' $json)
+	[[ -z $URL ]] && URL=https://discordapp.com/api/channels/${DISCORD_CHANNEL_ID}/messages 
+
+	echo '{
+  "content": "'${CONTENT}'",
+  "tts": false
+}' \
+	|curl -X POST -H "Content-Type: application/json" \
+	-H "Authorization: Bot ${TOKEN}" \
+	${URL} \
+	-d @- 
+}

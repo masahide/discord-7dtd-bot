@@ -21,8 +21,8 @@ tar -xzvf steamcmd_linux.tar.gz && rm -f steamcmd_linux.tar.gz
 	+login anonymous \
 	+force_install_dir /opt/games/7days \
 	+app_update 294420 \
+        -beta latest_experimental \
 	+quit
-#-beta latest_experimental \
 chown 7dtd: -R /opt/games/7days
 
 sleep 3

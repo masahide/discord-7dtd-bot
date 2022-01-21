@@ -9,5 +9,5 @@ tmppath="/tmp/${hostname}_${date}.gz"
 echo "7dtd backup started." | logger -t 7dtd_backup
 [[ -z $1 ]] && /opt/games/discord-7dtd-bot/scripts/world_save.sh
 tar -C /home/7dtd/ -zcf - .local | aws s3 cp - "${s3path}"  
-echo "7dtd backup finished. file: ${s3path}" | logger -t x 7dtd_backup
+echo "7dtd backup finished. file: ${s3path}" | logger -t 7dtd_backup
 
