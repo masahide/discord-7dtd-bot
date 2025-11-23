@@ -1,6 +1,6 @@
 module github.com/masahide/discord-7dtd-bot
 
-go 1.19
+go 1.24.0
 
 require (
 	github.com/aws/aws-sdk-go v1.44.184
@@ -15,6 +15,6 @@ require (
 	github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
-	golang.org/x/crypto v0.35.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/crypto v0.45.0 // indirect
+	golang.org/x/sys v0.38.0 // indirect
 )
